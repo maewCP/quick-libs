@@ -36,11 +36,17 @@ publishing {
             artifactId = "ffmpeg"
             version = "1.0-SNAPSHOT"
 
-            from(components["java"])
+//            from(components["java"])
+            artifact(tasks.jar.get())
         }
     }
 }
 
+
 kotlin {
     jvmToolchain(8)
+}
+
+tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
