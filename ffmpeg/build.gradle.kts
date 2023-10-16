@@ -17,7 +17,7 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0") // use in net.bramp.ffmpeg.progress.Progress.fps (ffmpeg-0.7.1-SNAPSHOT.jar)
     // FFMpeg Wrapper
     // implementation("net.bramp.ffmpeg:ffmpeg:0.7.0")
-    implementation(files("libs/ffmpeg-0.7.1-SNAPSHOT.jar")) // implement side_data_list for rotation
+    api(files("libs/ffmpeg-0.7.1-SNAPSHOT.jar")) // implement side_data_list for rotation
 }
 
 tasks {

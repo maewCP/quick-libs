@@ -1,10 +1,6 @@
-package me.teeraphab.utils
+package net.maew.quicklibs
 
-import ConsoleColors
-import QConsoleUtils
-import QFileUtils
 import net.bramp.ffmpeg.*
-import net.bramp.ffmpeg.FFmpegUtils
 import net.bramp.ffmpeg.builder.FFmpegBuilder
 import net.bramp.ffmpeg.job.FFmpegJob
 import net.bramp.ffmpeg.probe.FFmpegFormat
@@ -241,7 +237,7 @@ object QFFmpegUtils {
         val h = sec.toInt() / 60 / 60
         val m = sec.toInt() % (60 * 60) / 60
         val s = sec - (h * 60 * 60) - (m * 60)
-        return "${"%02d".format(h)}:${"%02d".format(m)}:${"%02.3f".format(s)}"
+        return "${"%02d".format(h)}:${"%02d".format(m)}:${"%02.0f".format(s)}"
     }
 
     @JvmStatic

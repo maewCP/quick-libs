@@ -1,4 +1,6 @@
-import QConsoleUtils.consolePrintln
+package net.maew.quicklibs
+
+import net.maew.quicklibs.QConsoleUtils.consolePrintln
 import java.io.File
 import java.net.URI
 import java.net.URL

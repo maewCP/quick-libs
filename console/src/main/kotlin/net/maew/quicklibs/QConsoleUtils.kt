@@ -1,3 +1,5 @@
+package net.maew.quicklibs
+
 object QConsoleUtils {
     @JvmStatic
     fun consolePrintln(color: String, text: String) {

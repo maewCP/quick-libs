@@ -1,3 +1,5 @@
+package net.maew.quicklibs
+
 import org.apache.commons.text.StringEscapeUtils
 import java.security.MessageDigest
 
