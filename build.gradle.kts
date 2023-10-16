@@ -12,7 +12,7 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    api(project(":console"))
+//    api(project(":console"))
 }
 
 tasks.test {
