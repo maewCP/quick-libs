@@ -1,22 +1,29 @@
+### Temp Files ###
+*~
+.DS_Store
+
+
+### Config Files ###
+application-local.properties
+flyway_master.conf
+flyway_tenant.conf
+gradle.properties
+tenant_schemas_list.conf
+app.key.der
+app.pub.der
+
+
+### jOOQ ###
+target/generated
+
+### Java & Kotlin ###
 .gradle
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-### Eclipse ###
+### STS ###
 .apt_generated
 .classpath
 .factorypath
@@ -28,6 +35,17 @@ bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
 
+### IntelliJ IDEA ###
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+.idea/*
+!.idea/codeStyles
+!.idea/runConfigurations
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -38,5 +56,11 @@ bin/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
-.DS_Store
+### Personal Config ###
+.envrc
+
+
+### Database Backup ###
+*.pgdump
+/.idea/codeStyles/codeStyleConfig.xml
+/.idea/codeStyles/Project.xml
