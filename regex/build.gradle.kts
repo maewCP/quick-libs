@@ -1,9 +1,9 @@
 plugins {
-    kotlin("jvm") version("1.9.0")
+    kotlin("jvm")
     `maven-publish`
 }
 
-group = "net.maew"
+group = "net.maew.quick-libs"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -11,11 +11,7 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test"))
-}
-
-tasks.test {
-    useJUnitPlatform()
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 tasks {
@@ -30,8 +26,8 @@ tasks {
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "net.maew"
-            artifactId = "quick-libs"
+            groupId = "net.maew.quick-libs"
+            artifactId = "regex"
             version = "1.0-SNAPSHOT"
 
             from(components["java"])

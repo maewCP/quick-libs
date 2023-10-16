@@ -10,4 +10,4 @@ plugins {
 }
 
 rootProject.name = "quick-libs"
-include("console")
+include("console", "file", "string", "regex", "json")
