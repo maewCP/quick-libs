@@ -37,11 +37,9 @@ publishing {
             version = "1.0-SNAPSHOT"
 
             from(components["java"])
-            artifact("libs/ffmpeg-0.7.1-SNAPSHOT.jar")
         }
     }
 }
-
 
 kotlin {
     jvmToolchain(8)
