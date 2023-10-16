@@ -3,7 +3,7 @@ object QRegexUtils {
     fun regexExtractFirst(regex: Regex, input: String, removeNewLine: Boolean = true): String {
         if (regex.containsMatchIn(input)) {
             var first = regex.find(input)!!.groups[1]!!.value
-            if (removeNewLine) first = first.replace("\\n", "")
+            if (removeNewLine) first = first.replace("\n", "")
             return first.trim()
         }
         return ""
@@ -35,7 +35,7 @@ object QRegexUtils {
             val matches = regex.findAll(input).toList()
             return matches.map { groups ->
                 var first = groups.groupValues[1]
-                if (removeNewLine) first = first.replace("\\n", "")
+                if (removeNewLine) first = first.replace("\n", "")
                 first.trim()
             }.filter { it != "" }.toList()
         }
