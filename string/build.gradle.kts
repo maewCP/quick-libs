@@ -12,6 +12,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation("org.apache.commons:commons-text:1.9") // StringEscapeUtils
 }
 
 tasks {
