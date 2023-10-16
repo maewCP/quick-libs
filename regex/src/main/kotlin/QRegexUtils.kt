@@ -10,10 +10,10 @@ object QRegexUtils {
     }
 
     @JvmStatic
-    fun regExExtractFirstNamedGroup(regex: Regex, input: String): Map<String, String> {
+    fun regexExtractFirstNamedGroup(regex: Regex, input: String): Map<String, String> {
         if (regex.containsMatchIn(input)) {
             val firstGroup = regex.find(input)!!.groups as MatchNamedGroupCollection
-            return regExExtractAllFirsts(
+            return regexExtractAllFirsts(
                 "\\?<(.+?)>".toRegex(),
                 regex.toString()
             ).associateWith { name -> firstGroup[name]?.value ?: "" }
@@ -22,7 +22,7 @@ object QRegexUtils {
     }
 
     @JvmStatic
-    fun regExMatchIdxRange(regex: Regex, input: String): IntRange? {
+    fun regexMatchIdxRange(regex: Regex, input: String): IntRange? {
         if (regex.containsMatchIn(input)) {
             return regex.find(input)!!.range
         }
@@ -30,7 +30,7 @@ object QRegexUtils {
     }
 
     @JvmStatic
-    fun regExExtractAllFirsts(regex: Regex, input: String, removeNewLine: Boolean = true): List<String> {
+    fun regexExtractAllFirsts(regex: Regex, input: String, removeNewLine: Boolean = true): List<String> {
         if (regex.containsMatchIn(input)) {
             val matches = regex.findAll(input).toList()
             return matches.map { groups ->
@@ -43,7 +43,7 @@ object QRegexUtils {
     }
 
     @JvmStatic
-    fun regExExtractAllNamedGroups(
+    fun regexExtractAllNamedGroups(
         regex: Regex,
         input: String
     ): List<Map<String, String>> {
@@ -52,7 +52,7 @@ object QRegexUtils {
             val groupss = regex.findAll(input).map { it.groups as MatchNamedGroupCollection }.toList()
             groupss.forEach { groups ->
                 all.add(
-                    regExExtractAllFirsts(
+                    regexExtractAllFirsts(
                         "\\?<(.+?)>".toRegex(),
                         regex.toString()
                     ).associateWith { name -> groups[name]?.value ?: "" })
