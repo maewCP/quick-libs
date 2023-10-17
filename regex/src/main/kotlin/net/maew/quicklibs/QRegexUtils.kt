@@ -1,3 +1,5 @@
+package net.maew.quicklibs
+
 object QRegexUtils {
     @JvmStatic
     fun regexExtractFirst(regex: Regex, input: String, removeNewLine: Boolean = true): String {
