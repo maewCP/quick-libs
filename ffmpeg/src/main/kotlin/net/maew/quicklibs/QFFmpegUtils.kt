@@ -12,6 +12,7 @@ import java.io.File
 import java.io.IOException
 import java.io.OutputStreamWriter
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
@@ -118,13 +119,14 @@ object QFFmpegUtils {
                     nextReportingPercentage = percentage.toInt() / progressReportIntervalPercentage * progressReportIntervalPercentage + progressReportIntervalPercentage
                     println(
                         java.lang.String.format(
-                            "[%.0f%%] status:%s frame:%d time:%s ms fps:%.0f speed:%.2fx",
+                            "[%.0f%%] status:%s frame:%d t:%s ms fps:%.0f speed:%.2fx timestamp:%s",
                             percentage,
                             progress.status,
                             progress.frame,
                             FFmpegUtils.toTimecode(progress.out_time_ns, TimeUnit.NANOSECONDS),
                             progress.fps.toDouble(),
-                            progress.speed
+                            progress.speed,
+                            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
                         )
                     )
                 }
