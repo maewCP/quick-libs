@@ -2,8 +2,24 @@ package net.maew.quicklibs
 
 object QConsoleUtils {
     @JvmStatic
+    fun consolePrint(color: String, text: String) {
+        consolePrint(setOf(color), text)
+    }
+
+    @JvmStatic
+    fun consolePrint(colors: Set<String>, text: String) {
+        colors.forEach { color -> print(color) }
+        print(text + ConsoleColors.RESET)
+    }
+
+    @JvmStatic
     fun consolePrintln(color: String, text: String) {
-        println(color + text + ConsoleColors.RESET)
+        consolePrintln(setOf(color), text)
+    }
+
+    fun consolePrintln(colors: Set<String>, text: String) {
+        colors.forEach { color -> print(color) }
+        println(text + ConsoleColors.RESET)
     }
 
     @JvmStatic
