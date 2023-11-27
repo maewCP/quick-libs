@@ -29,38 +29,52 @@ object QStringUtils {
         return String(hexDigits)
     }
 
+    /**
+    // remove illegal characters and replace with a more friendly char ;)
+     */
     @JvmStatic
     fun escapeFilename(
-        name: String,
-        singleSpaces: Boolean = true
+        fileName: String,
+        singleSpaces: Boolean,
+        trimLength: Int
     ): String {
-        // remove illegal characters and replace with a more friendly char ;)
-        var safe = name.trim { it <= ' ' }
+        var safe = fileName.trim { it <= ' ' }
 
         // remove illegal characters
         safe = safe.replace(
-            "[\\/|\\\\|\\*|\\:|\\||\"|\'|\\<|\\>|\\{|\\}|\\?|\\%|,]".toRegex(),
+            //"[\\/|\\\\|\\*|\\:|\\||\"|\'|\\<|\\>|\\{|\\}|\\?|\\%|,]".toRegex(),
+            "[\\/|\\\\|\\*|\\:|\\||\"|\\<|\\>|\\{|\\}|\\?|\\%]".toRegex(),
             ""
         )
 
-        // replace . dots with _ and remove the _ if at the end
-        safe = safe.replace("\\.".toRegex(), "_")
-        if (safe.endsWith("_")) {
+        // replace . dots with _
+        //safe = safe.replace("\\.".toRegex(), "_")
+
+        // remove the . if at the end
+        while (safe.endsWith(".")) {
             safe = safe.substring(0, safe.length - 1)
         }
 
         // replace whitespace characters with _
-        safe = safe.replace("\\s+".toRegex(), "_")
+        //safe = safe.replace("\\s+".toRegex(), "_")
 
         // replace double or more spaces with a single one
         if (singleSpaces) {
-            safe = safe.replace("_{2,}".toRegex(), "_")
+            //safe = safe.replace("_{2,}".toRegex(), "_")
+            safe = safe.replace(" {2,}".toRegex(), " ")
         }
+
+        // final trim
+        safe = safe.trim()
+
+        // limit long filename
+        if (safe.length > trimLength) safe = safe.substring(0, trimLength - 3) + "..."
+
         return safe
     }
 
     @JvmStatic
-    fun unescape(s: String) : String {
+    fun unescape(s: String): String {
         return StringEscapeUtils.unescapeXml(StringEscapeUtils.unescapeHtml4(s))
     }
 }
