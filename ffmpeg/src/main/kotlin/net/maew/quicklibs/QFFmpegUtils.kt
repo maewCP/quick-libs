@@ -13,6 +13,7 @@ import java.io.IOException
 import java.io.OutputStreamWriter
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 
@@ -108,25 +109,32 @@ object QFFmpegUtils {
         val executor = FFmpegExecutor(ffmpeg, FFprobe(ffprobePath))
 
         var nextReportingPercentage = 0
+        var startTime: LocalDateTime? = null
         val job: FFmpegJob = executor.createJob(builder, object : ProgressListener {
             // Using the FFmpegProbeResult determine the duration of the input
             val duration_ns: Double = inputFormat.duration * TimeUnit.SECONDS.toNanos(1)
             override fun progress(progress: Progress) {
                 val percentage: Double = progress.out_time_ns / duration_ns * 100
-
                 // Print out interesting information about the progress
                 if (percentage >= nextReportingPercentage) {
                     nextReportingPercentage = percentage.toInt() / progressReportIntervalPercentage * progressReportIntervalPercentage + progressReportIntervalPercentage
+                    val now = LocalDateTime.now()
+                    val eta = if (startTime != null) startTime!!.plusNanos((ChronoUnit.NANOS.between(startTime, now) * 100L / percentage).toLong()) else null
+
+                    if (startTime == null) startTime = now
+
                     println(
                         java.lang.String.format(
-                            "[%.0f%%] status:%s frame:%d t:%s ms fps:%.0f speed:%.2fx timestamp:%s",
+//                            "[%.0f%%] status:%s frame:%d t:%s ms fps:%.0f speed:%.2fx timestamp:%s eta:%s",
+                            "[%.0f%%] fps:%.0f speed:%.2fx timestamp:%s eta:%s",
                             percentage,
                             progress.status,
                             progress.frame,
                             FFmpegUtils.toTimecode(progress.out_time_ns, TimeUnit.NANOSECONDS),
                             progress.fps.toDouble(),
                             progress.speed,
-                            LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
+                            now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
+                            eta?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) ?: "",
                         )
                     )
                 }
