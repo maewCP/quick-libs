@@ -126,7 +126,7 @@ object QFFmpegUtils {
                     println(
                         java.lang.String.format(
 //                            "[%.0f%%] status:%s frame:%d t:%s ms fps:%.0f speed:%.2fx timestamp:%s eta:%s",
-                            "[%.0f%%] fps:%.0f speed:%.2fx timestamp:%s eta:%s",
+                            "[%.0f%%] fps:%.0f speed:%.2fx now:%s eta:%s",
                             percentage,
                             progress.status,
                             progress.frame,
