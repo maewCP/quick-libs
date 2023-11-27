@@ -35,8 +35,8 @@ object QStringUtils {
     @JvmStatic
     fun escapeFilename(
         fileName: String,
-        singleSpaces: Boolean,
-        trimLength: Int
+        singleSpaces: Boolean = true,
+        trimLength: Int = Int.MAX_VALUE
     ): String {
         var safe = fileName.trim { it <= ' ' }
 
