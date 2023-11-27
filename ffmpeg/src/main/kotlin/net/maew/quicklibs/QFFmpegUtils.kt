@@ -120,23 +120,30 @@ object QFFmpegUtils {
                     nextReportingPercentage = percentage.toInt() / progressReportIntervalPercentage * progressReportIntervalPercentage + progressReportIntervalPercentage
                     val now = LocalDateTime.now()
                     val eta = if (startTime != null) startTime!!.plusNanos((ChronoUnit.NANOS.between(startTime, now) * 100L / percentage).toLong()) else null
-
                     if (startTime == null) startTime = now
 
                     println(
                         java.lang.String.format(
-//                            "[%.0f%%] status:%s frame:%d t:%s ms fps:%.0f speed:%.2fx timestamp:%s eta:%s",
                             "[%.0f%%] fps:%.0f speed:%.2fx now:%s eta:%s",
                             percentage,
-                            progress.status,
-                            progress.frame,
-                            FFmpegUtils.toTimecode(progress.out_time_ns, TimeUnit.NANOSECONDS),
                             progress.fps.toDouble(),
                             progress.speed,
                             now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
-                            eta?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) ?: "",
+                            eta?.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) ?: ""
                         )
                     )
+
+//                    println(
+//                        java.lang.String.format(
+//                            "[%.0f%%] status:%s frame:%d t:%s ms fps:%.0f speed:%.2fx",
+//                            percentage,
+//                            progress.status,
+//                            progress.frame,
+//                            FFmpegUtils.toTimecode(progress.out_time_ns, TimeUnit.NANOSECONDS),
+//                            progress.fps.toDouble(),
+//                            progress.speed
+//                        )
+//                    )
                 }
             }
         })
