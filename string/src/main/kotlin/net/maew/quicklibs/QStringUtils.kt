@@ -33,7 +33,7 @@ object QStringUtils {
     // remove illegal characters and replace with a more friendly char ;)
      */
     @JvmStatic
-    fun escapeFilename(
+    fun removeIllegalFileNameSpecialCharacters(
         fileName: String,
         singleSpaces: Boolean = true,
         trimLength: Int = Int.MAX_VALUE
@@ -76,5 +76,10 @@ object QStringUtils {
     @JvmStatic
     fun unescape(s: String): String {
         return StringEscapeUtils.unescapeXml(StringEscapeUtils.unescapeHtml4(s))
+    }
+
+    @JvmStatic
+    fun removeRegexSpecialCharacters(text: String): String {
+        return text.replace("[\\/\\.\\*\\+\\?\\|\\(\\)\\[\\]\\{\\}\\\\]".toRegex(), "")
     }
 }

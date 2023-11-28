@@ -27,7 +27,7 @@ object QFFmpegUtils {
         try {
             probeResult = ffprobe.probe(input)
         } catch (e: Exception) {
-            QConsoleUtils.consolePrintln(ConsoleColors.RED, "FFProbe.exe Cannot read file $input -> Skip")
+            QConsoleUtils.println(ConsoleColors.RED, "FFProbe.exe Cannot read file $input -> Skip")
             if (e.message != null) e.printStackTrace()
             return Pair(null, null)
         }
@@ -224,7 +224,7 @@ object QFFmpegUtils {
 		 * ffmpeg -f x11grab
 		 */
 
-        QConsoleUtils.consolePrintln(ConsoleColors.BLUE_BOLD, "About to destroy the child process...")
+        QConsoleUtils.println(ConsoleColors.BLUE_BOLD, "About to destroy the child process...")
         try {
             OutputStreamWriter(process.outputStream).use { out -> out.write('q'.code) }
         } catch (ioe: IOException) {
@@ -236,9 +236,9 @@ object QFFmpegUtils {
                 process.waitFor()
             }
             if (QFileUtils.deleteWithRetry(File(output))) {
-                QConsoleUtils.consolePrintln(ConsoleColors.GREEN, "Delete temp file successfully $output")
+                QConsoleUtils.println(ConsoleColors.GREEN, "Delete temp file successfully $output")
             } else {
-                QConsoleUtils.consolePrintln(ConsoleColors.RED, "Cannot delete temp file $output")
+                QConsoleUtils.println(ConsoleColors.RED, "Cannot delete temp file $output")
             }
             process.exitValue()
         } catch (ie: InterruptedException) {

@@ -1,6 +1,5 @@
 package net.maew.quicklibs
 
-import net.maew.quicklibs.QConsoleUtils.consolePrintln
 import java.io.File
 import java.net.URI
 import java.net.URL
@@ -20,7 +19,7 @@ object QFileUtils {
                 Files.delete(Paths.get(file.path))
                 return true
             } catch (e: Exception) {
-                consolePrintln(ConsoleColors.YELLOW, "Cannot delete $file")
+                QConsoleUtils.println(ConsoleColors.YELLOW, "Cannot delete $file")
                 if (e.message != null) println("Exception: " + e.message!!)
                 e.printStackTrace()
                 val sleepSec = Random.nextInt(5, 10)
@@ -28,7 +27,7 @@ object QFileUtils {
                 Thread.sleep((sleepSec * 1000).toLong())
             }
         }
-        consolePrintln(ConsoleColors.RED, "Stop trying.")
+        QConsoleUtils.println(ConsoleColors.RED, "Stop trying.")
         return false
     }
 
@@ -44,7 +43,7 @@ object QFileUtils {
                 }
                 return true
             } catch (e: Exception) {
-                consolePrintln(ConsoleColors.YELLOW, "Cannot rename $ori to $dst")
+                QConsoleUtils.println(ConsoleColors.YELLOW, "Cannot rename $ori to $dst")
                 if (e.message != null) println("Exception: " + e.message!!)
                 e.printStackTrace()
                 val sleepSec = Random.nextInt(5, 10)
@@ -52,7 +51,7 @@ object QFileUtils {
                 Thread.sleep((sleepSec * 1000).toLong())
             }
         }
-        consolePrintln(ConsoleColors.RED, "Stop trying.")
+        QConsoleUtils.println(ConsoleColors.RED, "Stop trying.")
         return false
     }
 
@@ -68,7 +67,7 @@ object QFileUtils {
                 }
                 return true
             } catch (e: Exception) {
-                consolePrintln(ConsoleColors.YELLOW, "Cannot copy $ori to $dst")
+                QConsoleUtils.println(ConsoleColors.YELLOW, "Cannot copy $ori to $dst")
                 if (e.message != null) println("Exception: " + e.message!!)
                 e.printStackTrace()
                 val sleepSec = Random.nextInt(5, 10)
@@ -76,7 +75,7 @@ object QFileUtils {
                 Thread.sleep((sleepSec * 1000).toLong())
             }
         }
-        consolePrintln(ConsoleColors.RED, "Stop trying.")
+        QConsoleUtils.println(ConsoleColors.RED, "Stop trying.")
         return false
     }
 

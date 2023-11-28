@@ -2,34 +2,34 @@ package net.maew.quicklibs
 
 object QConsoleUtils {
     @JvmStatic
-    fun consolePrint(color: String, text: String) {
-        consolePrint(setOf(color), text)
+    fun print(color: String, text: String) {
+        print(setOf(color), text)
     }
 
     @JvmStatic
-    fun consolePrint(colors: Set<String>, text: String) {
+    fun print(colors: Set<String>, text: String) {
         colors.forEach { color -> print(color) }
         print(text + ConsoleColors.RESET)
     }
 
     @JvmStatic
-    fun consolePrintln(color: String, text: String) {
-        consolePrintln(setOf(color), text)
+    fun println(color: String, text: String) {
+        println(setOf(color), text)
     }
 
-    fun consolePrintln(colors: Set<String>, text: String) {
+    fun println(colors: Set<String>, text: String) {
         colors.forEach { color -> print(color) }
         println(text + ConsoleColors.RESET)
     }
 
     @JvmStatic
-    fun consolePrintBox(color: String, texts: List<String>, minWidth: Int) {
+    fun printBox(color: String, texts: List<String>, minWidth: Int) {
         val innerLen = texts.maxOf { it.length }.coerceAtLeast(minWidth.coerceAtLeast(4) - 4)
-        consolePrintln(color, "*".repeat(innerLen + 4))
+        println(color, "*".repeat(innerLen + 4))
         texts.forEach { text ->
-            consolePrintln(color, "* " + text + " ".repeat(innerLen - text.length) + " *")
+            println(color, "* " + text + " ".repeat(innerLen - text.length) + " *")
         }
-        consolePrintln(color, "*".repeat(innerLen + 4))
+        println(color, "*".repeat(innerLen + 4))
     }
 }
 
