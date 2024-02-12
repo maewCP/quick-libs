@@ -96,7 +96,6 @@ object QFileUtils {
         var targetPathName = getFileNameAndExtension(pathName)
         do {
             val extension = getFileExtension(targetPathName)
-            println("Extension: $extension")
             if (extension != "") extensions.add(extension)
             targetPathName = getFileNameOnly(targetPathName)
         } while (extension != "")
