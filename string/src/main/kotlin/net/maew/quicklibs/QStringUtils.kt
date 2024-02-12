@@ -47,6 +47,12 @@ object QStringUtils {
             ""
         )
 
+        // remove more illegal characters
+        safe = safe.replace(
+            "[\\n|\\r]".toRegex(),
+            ""
+        )
+
         // replace . dots with _
         //safe = safe.replace("\\.".toRegex(), "_")
 
