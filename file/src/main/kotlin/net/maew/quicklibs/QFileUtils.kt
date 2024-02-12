@@ -81,7 +81,28 @@ object QFileUtils {
 
     @JvmStatic
     fun getFileExtension(fileName: String): String {
-        return fileName.substring(fileName.lastIndexOf(".") + 1).lowercase()
+        val extensionSeparatorIndex = fileName.lastIndexOf(".")
+        if (extensionSeparatorIndex == -1) return ""
+        else {
+            val extension = fileName.substring(extensionSeparatorIndex + 1).lowercase()
+            if (extension == "" || extension.contains(" ")) return ""
+            return extension
+        }
+    }
+
+    @JvmStatic
+    fun addFileSubExtensionAtFirstPosition(pathName: String, subExtensionWithDot: String): String {
+        val extensions = mutableListOf<String>()
+        var targetPathName = getFileNameAndExtension(pathName)
+        do {
+            val extension = getFileExtension(targetPathName)
+            println("Extension: $extension")
+            if (extension != "") extensions.add(extension)
+            targetPathName = getFileNameOnly(targetPathName)
+        } while (extension != "")
+        targetPathName += subExtensionWithDot
+        extensions.reversed().forEach { extension -> targetPathName += ".$extension" }
+        return getFolder(pathName, true) + targetPathName
     }
 
     @JvmStatic
@@ -94,13 +115,14 @@ object QFileUtils {
     fun getFileNameOnly(pathName: String): String {
         val folderSeparatorIndex = pathName.lastIndexOf("/").coerceAtLeast(pathName.lastIndexOf("\\"))
         val fileName = if (folderSeparatorIndex == -1) pathName else pathName.substring(folderSeparatorIndex)
-        return fileName.substring(0, pathName.lastIndexOf("."))
+        val extension = getFileExtension(fileName)
+        return if (extension != "") fileName.substring(0, fileName.lastIndexOf(".")) else fileName
     }
 
     @JvmStatic
-    fun getFolder(pathName: String): String {
+    fun getFolder(pathName: String, includeLastFolderSeparator: Boolean = false): String {
         val folderSeparatorIndex = pathName.lastIndexOf("/").coerceAtLeast(pathName.lastIndexOf("\\"))
-        return if (folderSeparatorIndex == -1) "" else pathName.substring(0, folderSeparatorIndex)
+        return if (folderSeparatorIndex == -1) "" else pathName.substring(0, folderSeparatorIndex + if (includeLastFolderSeparator) 1 else 0)
     }
 
     @JvmStatic
